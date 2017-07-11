@@ -1,0 +1,23 @@
+{
+  "name": "epicbuttongame",
+  "version": "1.0.0",
+  "description": "Epic Button Game",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Andonon/CD_SocketIO_EpicButtonGame.git"
+  },
+  "author": "Troy Center",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Andonon/CD_SocketIO_EpicButtonGame/issues"
+  },
+  "homepage": "https://github.com/Andonon/CD_SocketIO_EpicButtonGame#readme",
+  "dependencies": {
+    "ejs": "^2.5.6",
+    "express": "^4.15.3"
+  }
+}
