@@ -11,21 +11,31 @@
     <script>
         $(document).ready(function(){
             const socket = io.connect()        
-                socket.on('server_response',function(data){
+                socket.on('counter_update',function(data){
                     console.log("The server says: ", data.response)
+                    console.log("Server got back new counter: ", data.counter)
+                    document.getElementById('counter').innerHTML = '';
+                    document.getElementById('counter').innerHTML = data.counter;
                 });        
                 $('#epicbutton').click(function(event){
                     event.preventDefault();
                     console.log("Epic Button Clicked")
-                    socket.emit("epicbuttonclick")
+                    socket.emit("epicbuttonclick", {
+                        counter: $('#counter').text()
+                    });
+                });
+                $('#resetbutton').click(function(event){
+                    event.preventDefault();
+                    console.log("Reset Button Clicked")
+                    socket.emit("resetbuttonclick");
                 });
         });
     </script>
     <body>
         <div id='wrapper'>
             <h2>Epic Number Game </h2>
-            <div id='counter'>
-                <h3>The button has been pushed XX time(s)</h3>
+            <div id='counterdisplay'>
+                <h3>The button has been pushed <span id='counter'>0</span> time(s)</h3>
             </div>
             <div id='button'>
                 <p>Push the button to update the count</p>

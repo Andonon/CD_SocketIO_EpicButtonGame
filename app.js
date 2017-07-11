@@ -17,13 +17,28 @@ const server = app.listen(port, function(){
 
 var io = require('socket.io').listen(server);
 
+counter = 0;
+
 io.sockets.on('connection', function(socket){
     console.log('connected socket', socket.id)
     socket.on('disconnect', function(){
         console.log("disconnected socket", socket.id)
     });
-    socket.on('epicbuttonclick', function(){
+    socket.on('epicbuttonclick', function(data){
         console.log("Epic button click in app.js");
-        socket.emit('server_response', {response: "testing"})
+        console.log(data.counter);
+        counter++
+        io.emit('counter_update', {
+            response: "Updated Counter",
+            counter: counter,
+        });
+    });
+    socket.on('resetbuttonclick', function(){
+        console.log("Reset button click in app.js");
+        counter = 0;
+        io.emit('counter_update', {
+            response: "Updated Counter",
+            counter: counter,
+        });
     });
 });
