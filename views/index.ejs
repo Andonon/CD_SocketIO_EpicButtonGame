@@ -4,11 +4,39 @@
         <title>Epic Number Game</title>
         <meta description='Home Page for Epic Number Game app'
         <meta charset='utf-8'/>
+        <script src='/jquery/jquery.js'></script>
+        <script type='text/javascript' src='/socket.io/socket.io.js'></script>
         <link rel='stylesheet' type='text/css' href='css/styles.css' />
     </head>
+    <script>
+        $(document).ready(function(){
+            const socket = io.connect()        
+                socket.on('server_response',function(data){
+                    console.log("The server says: ", data.response)
+                });        
+                $('#epicbutton').click(function(event){
+                    event.preventDefault();
+                    console.log("Epic Button Clicked")
+                    socket.emit("epicbuttonclick")
+                });
+        });
+    </script>
     <body>
         <div id='wrapper'>
-            <h2>Hello Epic Number Game </h2>
+            <h2>Epic Number Game </h2>
+            <div id='counter'>
+                <h3>The button has been pushed XX time(s)</h3>
+            </div>
+            <div id='button'>
+                <p>Push the button to update the count</p>
+                <button id='epicbutton'>Push the epic button</button>
+            </div>
+            <div id='reset'>
+                <button id='resetbutton'>Reset count</button>
+            </div>
         </div>
+        <footer>
+            <p>by Troy Center July 2017, Coding Dojo student. "Epic Button Game" assignment.</p>
+        </footer> 
     </body>
 </html>
